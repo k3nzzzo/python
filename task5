@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+def visualize_city_grid(grid, obstructed_blocks, towers, coverage_areas, data_paths):
+    plt.figure(figsize=(10, 10))
+
+    # Plot the grid
+    plt.imshow(grid, cmap='gray', alpha=0.5)
+
+    # Plot the obstructed blocks
+    plt.scatter(obstructed_blocks[:, 0], obstructed_blocks[:, 1], color='red')
+
+    # Plot the towers
+    plt.scatter(towers[:, 0], towers[:, 1], color='blue')
+
+    # Plot the coverage areas
+    for area in coverage_areas:
+        plt.plot(area[:, 0], area[:, 1], color='green')
+
+    # Plot the data paths
+    for path in data_paths:
+        plt.plot(path[:, 0], path[:, 1], color='yellow')
+
+    plt.show()
+grid = np.zeros((10, 10)) # 10x10 grid
+obstructed_blocks = np.array([[2, 2], [3, 3], [4, 4]]) # Obstructed blocks
+towers = np.array([[5, 5], [6, 6], [7, 7]]) # Towers
+coverage_areas = [np.array([[0, 0], [1, 1], [2, 2]])] # Coverage areas
+data_paths = [np.array([[0, 0], [1, 1], [2, 2]])] # Data paths
+
+visualize_city_grid(grid, obstructed_blocks, towers, coverage_areas, data_paths)
