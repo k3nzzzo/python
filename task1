@@ -1,0 +1,22 @@
+import random
+class CityGrid:
+    def __init__(self, rows, columns, obstruction_rate=0.3):
+        self.rows = rows
+        self.columns = columns
+        self.grid = self._generate_grid(obstruction_rate)
+
+    def _generate_grid(self, obstruction_rate):
+        grid = []
+        for i in range(self.rows):
+            row = []
+            for j in range(self.columns):
+                is_obstructed = random.random() < obstruction_rate
+                row.append(is_obstructed)
+            grid.append(row)
+        return grid
+    def display(self):
+        for row in self.grid:
+            print(" ".join(["X" if block else "O" for block in row]))
+
+city = CityGrid(5, 5)
+city.display()
