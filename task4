@@ -1,1 +1,30 @@
+import heapq
 
+def dijkstra(graph, start, end):
+   # The heap stores tuples of (distance, node)
+   heap = [(0, start)]
+   distances = {node: float('infinity') for node in graph}
+   distances[start] = 0
+
+   while heap:
+       (dist, current) = heapq.heappop(heap)
+       if current == end:
+           return distances[end]
+       for neighbour in graph[current]:
+           old_dist = distances[neighbour]
+           new_dist = dist + 1
+           if new_dist < old_dist:
+               distances[neighbour] = new_dist
+               heapq.heappush(heap, (new_dist, neighbour))
+   return float('infinity')
+
+
+graph = {
+   'A': ['B', 'C'],
+   'B': ['A', 'D', 'E'],
+   'C': ['A', 'F'],
+   'D': ['B'],
+   'E': ['B', 'F'],
+   'F': ['C', 'E'],
+}
+print(dijkstra(graph, 'A', 'F')) # : 2
